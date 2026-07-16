@@ -13,7 +13,7 @@ const BLUR_LAYERS = [
 const socials = [
     {
         icon: GitHubIcon,
-        href: "https://github.com/dickeyy",
+        href: "https://github.com/kyledickey",
     },
     {
         icon: TwitterIcon,

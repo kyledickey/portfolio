@@ -26,13 +26,13 @@ const PROJECTS = [
         name: "Diary",
         description:
             "A zero-knowledge journaling platform with E2E encryption and real-time synchronization across devices.",
-        github: "https://github.com/dickeyy/diary",
+        github: "https://github.com/kyledickey/diary",
         link: "https://diary.kyle.so",
     },
     {
         name: "Poof",
         description: "A self-destructing text sharing service.",
-        github: "https://github.com/dickeyy/poof",
+        github: "https://github.com/kyledickey/poof",
         link: "https://poof.sh",
     },
     {
@@ -52,13 +52,13 @@ const PROJECTS = [
         name: "Alias",
         description:
             "A digitized version of a game played by my family on holidays.",
-        github: "https://github.com/dickeyy/alias",
+        github: "https://github.com/kyledickey/alias",
         link: "https://alias.kyle.so",
     },
     {
         name: "vimhint",
         description: "A discrete Vim cheatsheet for macOS",
-        github: "https://github.com/dickeyy/vimhint",
+        github: "https://github.com/kyledickey/vimhint",
     },
 ];
 
@@ -196,7 +196,7 @@ function RouteComponent() {
                     </div>
                     <div className="mt-5">
                         <a
-                            href="https://github.com/dickeyy"
+                            href="https://github.com/kyledickey"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors"
