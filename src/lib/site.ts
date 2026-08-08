@@ -1,8 +1,11 @@
 export const SITE_TITLE = "Kyle Dickey";
-export const SITE_DESCRIPTION = "Kyle Dickey, software engineer";
+export const SITE_DESCRIPTION =
+    "Kyle Dickey, embedded software engineering intern at TerumoBCT";
 export const SITE_URL = "https://kyle.so";
 export const KEYWORDS = [
     "Kyle Dickey",
+    "TerumoBCT",
+    "embedded software engineer",
     "software engineer",
     "developer",
     "engineer",

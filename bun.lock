@@ -34,7 +34,6 @@
         "@content-collections/markdown": "^0.1.4",
         "@content-collections/mdx": "^0.1.2",
         "@content-collections/vite": "^0.2.8",
-        "@fontsource/gaegu": "^5.2.8",
         "@tailwindcss/typography": "^0.5.16",
         "@tanstack/devtools-vite": "^0.3.11",
         "@testing-library/dom": "^10.4.0",
@@ -247,8 +246,6 @@
     "@floating-ui/utils": ["@floating-ui/utils@0.2.10", "", {}, "sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ=="],
 
     "@fontsource-variable/inter": ["@fontsource-variable/inter@5.2.8", "", {}, "sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ=="],
-
-    "@fontsource/gaegu": ["@fontsource/gaegu@5.2.8", "", {}, "sha512-3rjyZGlUOQJo5zx0/1YFiFYKv4SZtaPiORncSXX4guo2P/sTMbxUIJRJWe14IS+CbkSrDppu24Y/KpXyQSFyhA=="],
 
     "@hono/node-server": ["@hono/node-server@1.19.11", "", { "peerDependencies": { "hono": "^4" } }, "sha512-dr8/3zEaB+p0D2n/IUrlPF1HZm586qgJNXK1a9fhg/PzdtkK7Ksd5l312tJX2yBuALqDYBlG20QEbayqPyxn+g=="],
 
