@@ -57,8 +57,8 @@ export function Navbar() {
                 />
             </div>
 
-            <div className="relative mx-auto flex w-screen items-center justify-between px-6 sm:px-12 py-2">
-                <img src="/logo.svg" alt="Kyle Dickey" className="size-8" />
+            <div className="relative mx-auto flex w-screen items-center justify-end px-6 sm:px-12 py-2">
+                {/*<img src="/logo.svg" alt="Kyle Dickey" className="size-6" />*/}
                 <div className="flex items-center gap-3">
                     {socials.map(({ icon, href }) => (
                         <SocialIcon key={href} icon={icon} href={href} />
