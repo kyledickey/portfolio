@@ -24,7 +24,7 @@ export function hash(x: number, y: number, seed = 0) {
     return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
 }
 
-type Tone = number | ((x: number, y: number) => number);
+export type Tone = number | ((x: number, y: number) => number);
 
 export class Pen {
     readonly tones: Float32Array;
