@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { INK, PAPER } from "#/lib/pixels";
+import { PAPER } from "#/lib/pixels";
 
 const W = 30;
 const H = 16;
+// A lighter take on CSU green.
+const GREEN = [46, 125, 70] as const;
 // "CSU" in a 3×5 pixel face.
 const LETTERS = [
     ["###", "#..", "#..", "#..", "###"],
@@ -23,7 +25,7 @@ export function Pennant() {
             pixels.data.fill(0);
             const set = (x: number, y: number, ink: boolean) => {
                 if (x < 0 || y < 0 || x >= W || y >= H) return;
-                const color = ink ? INK : PAPER;
+                const color = ink ? GREEN : PAPER;
                 const index = (y * W + x) * 4;
                 pixels.data[index] = color[0];
                 pixels.data[index + 1] = color[1];
