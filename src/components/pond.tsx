@@ -14,7 +14,6 @@ const SPEED = 10;
 type Ripple = { x: number; y: number; age: number };
 
 // Little glyphs, drawn facing right.
-const FROG = ["..#..#..", ".######.", "########", "#.####.#", ".##..##."];
 const FISH = [".###.#", "######", ".###.#"];
 const DUCKLING = [
     "....###..",
@@ -82,11 +81,7 @@ export function Pond() {
     const ramHop = useRef(-10);
     const ramSpot = useRef({ x: -100, y: -100 });
     const width = useRef(300);
-    // Which lily pad the frog is on, and when it last set off for it.
-    const frog = useRef({ pad: 0, from: 0, since: -10, nextHop: 8 });
-    const pads = useRef<{ x: number; y: number }[]>([]);
     const clock = useRef(0);
-    const hopNow = useRef(() => {});
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -101,18 +96,6 @@ export function Pond() {
         let visible = true;
         const start = last;
 
-        const hop = (t: number) => {
-            const f = frog.current;
-            const count = pads.current.length;
-            if (count < 2 || t - f.since < 0.8) return;
-            const skip =
-                1 + Math.floor(hash(Math.floor(t), 3, 7) * (count - 1));
-            f.from = f.pad;
-            f.pad = (f.pad + skip) % count;
-            f.since = t;
-            f.nextHop = t + 7 + hash(Math.floor(t), 4, 7) * 8;
-        };
-        hopNow.current = () => hop(clock.current);
         let splashed = -1;
 
         const draw = (t: number, dt: number) => {
@@ -188,41 +171,6 @@ export function Pond() {
                     }
                 }
             }
-            // Lily pads near the surface.
-            const padList: { x: number; y: number }[] = [];
-            for (let i = 0; i < Math.max(3, Math.round(W / 70)); i++) {
-                const px = Math.round(hash(i, 3, 6) * (W - BANK - 12)) + 6;
-                const py = WATER + 5 + Math.round(hash(i, 4, 6) * 10);
-                padList.push({ x: px, y: py });
-                for (let y = -2; y <= 2; y++) {
-                    for (let x = -5; x <= 5; x++) {
-                        if (
-                            (x / 5) ** 2 + (y / 2.2) ** 2 > 1 ||
-                            (x > 0 && y === 0)
-                        ) {
-                            continue;
-                        }
-                        const edge = x === -5 || x === 5 || Math.abs(y) === 2;
-                        tone[(py + y) * W + px + x] = edge ? 1 : 0;
-                    }
-                }
-            }
-            pads.current = padList;
-
-            // The frog: sits on a pad, now and then hops to another one.
-            const f = frog.current;
-            if (!still && t > f.nextHop) hop(t);
-            const to = padList[f.pad % padList.length];
-            const from = padList[f.from % padList.length];
-            const flight = Math.min(1, (t - f.since) / 0.7);
-            const fx = from.x + (to.x - from.x) * flight - 8;
-            const fy =
-                from.y +
-                (to.y - from.y) * flight -
-                10 -
-                Math.sin(Math.PI * flight) * 14;
-            stamp(tone, W, FROG, fx, fy, to.x < from.x && flight < 1);
-
             // A fish that jumps every so often, splashing back in.
             if (!still) {
                 const leap = Math.floor(t / JUMP_EVERY);
@@ -456,7 +404,7 @@ export function Pond() {
             ref={canvasRef}
             className="pond"
             role="img"
-            aria-label="A pixel pond: a duck paddling back and forth, a frog on the lily pads, a jumping fish and a dragonfly. Click the water for ripples, the duck to make it quack, or the frog to make it hop."
+            aria-label="A pixel pond: a duck paddling back and forth, a jumping fish and a dragonfly. Click the water for ripples, the duck to make it quack, or the ram to make it cheer."
             onPointerDown={(event) => {
                 const rect = event.currentTarget.getBoundingClientRect();
                 const x =
@@ -473,19 +421,6 @@ export function Pond() {
                     return;
                 }
                 const d = duck.current;
-                const pad =
-                    pads.current[
-                        frog.current.pad % Math.max(1, pads.current.length)
-                    ];
-                if (
-                    pad &&
-                    Math.abs(x - pad.x) < 10 &&
-                    y > pad.y - 14 &&
-                    y < pad.y + 3
-                ) {
-                    hopNow.current();
-                    return;
-                }
                 if (
                     x > d.x &&
                     x < d.x + 24 &&
