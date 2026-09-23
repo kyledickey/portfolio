@@ -39,9 +39,23 @@ const CHEER = "GO RAMS!";
 const CHEER_TIME = 1.8;
 
 /** The grassy bank on the right, where the ram stands. */
-const BANK = 70;
+const BANK = 92;
 const JUMP_EVERY = 6;
 const JUMP_TIME = 1.1;
+
+/**
+ * The bank, for anyone who wants to come and sit on it: where it starts, a
+ * seat on its flat top between the slope and the ram, and where the water
+ * is. CSS pixels from the pond's corner.
+ */
+export function pondBank(width: number) {
+    const W = Math.max(60, Math.round(width / GRAIN));
+    return {
+        left: (W - BANK + 20) * GRAIN,
+        seat: { x: (W - BANK + 34) * GRAIN, y: (WATER - 7) * GRAIN + 2 },
+        water: WATER * GRAIN,
+    };
+}
 
 function stamp(
     tone: Float32Array,
@@ -267,7 +281,7 @@ export function Pond() {
             const cheering = t - ramHop.current < CHEER_TIME;
             const grazing = !still && !hopping && Math.sin(t * 0.55) > 0.1;
             const ram = drawRam(grazing, 0);
-            const rx = W - BANK + 26;
+            const rx = W - BANK + 48;
             const lift = hopping
                 ? Math.round(
                       Math.sin(((t - ramHop.current) / 0.6) * Math.PI) * 6,
