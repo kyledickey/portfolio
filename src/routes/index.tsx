@@ -69,6 +69,9 @@ function Home() {
                         <h2 id={projectsId} className="label">
                             Some things I’ve made
                         </h2>
+                        <p className="secret" aria-hidden="true">
+                            type boom
+                        </p>
                         <ProjectWall projects={projects} />
                         <div className="prose drawer">
                             <p className="smaller">
