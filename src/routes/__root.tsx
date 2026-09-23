@@ -1,4 +1,10 @@
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+    createRootRoute,
+    HeadContent,
+    Link,
+    Scripts,
+} from "@tanstack/react-router";
+import { DuckWalk } from "#/components/duck-walk";
 
 import {
     KEYWORDS,
@@ -55,7 +61,30 @@ export const Route = createRootRoute({
         ],
     }),
     shellComponent: RootDocument,
+    notFoundComponent: NotFound,
 });
+
+function NotFound() {
+    return (
+        <div className="page">
+            <header className="masthead">
+                <Link to="/">kyle.so</Link>
+            </header>
+            <main className="lost">
+                <h1 className="label">404</h1>
+                <p>
+                    Nothing lives at this address. Get Quack back to the house
+                    and you’ll be home.
+                </p>
+                <DuckWalk />
+                <p className="lost-keys">← → to walk, space to jump</p>
+                <Link className="lost-skip" to="/">
+                    or skip the walk →
+                </Link>
+            </main>
+        </div>
+    );
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
     return (
@@ -71,6 +100,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     sizes="180x180"
                     href="/apple-touch-icon.png"
                 />
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
                 <link
                     rel="icon"
                     type="image/png"

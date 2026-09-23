@@ -26,9 +26,20 @@ export function PreviewPopup({
                 closeDelay={closeDelay}
                 render={triggerRender ?? <span />}
                 className={cn(
-                    // Lift above the popup's blur layer (z-50) while open, so the
-                    // cited term itself stays crisp instead of washing out.
-                    "relative inline-flex w-fit self-start hover:z-[60] data-[popup-open]:z-[60]",
+                    // Sits above the popup's blur layers (z-50) so the cited
+                    // term stays crisp. This is deliberately *unconditional*:
+                    // toggling z-index on open/close re-creates the stacking
+                    // context and forces a re-raster of the chip's gradient and
+                    // inset rings, which reads as a one-frame flicker. Paint
+                    // order never changes now, so there is nothing to flicker.
+                    "relative z-[60] inline-flex w-fit self-start",
+                    // Consequence of the above: a *different* citation in the
+                    // same paragraph would also stay crisp and float sharp in
+                    // an otherwise blurred field. Blur those ourselves, on the
+                    // popup's timing. Filter-only, so still no reflow/reorder.
+                    "transition-[filter,opacity] duration-300 ease-out",
+                    "[body:has([data-popup-open])_&:not([data-popup-open])]:opacity-70",
+                    "[body:has([data-popup-open])_&:not([data-popup-open])]:blur-[5px]",
                     triggerClassName,
                 )}
             >

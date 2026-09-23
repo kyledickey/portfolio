@@ -32,7 +32,7 @@ export function ExperienceCitationTrigger({
     return (
         <span
             className={cn(
-                "inline-flex cursor-grab items-baseline gap-1 rounded-md bg-[linear-gradient(to_bottom,var(--card),var(--secondary))] px-1 ring-[1px] ring-black/15 ring-inset shadow-[inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-1px_0_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.18)] ",
+                "citation-chip inline-flex cursor-default items-baseline gap-1 px-1",
                 logoURL && "pr-1.75",
                 className,
             )}

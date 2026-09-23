@@ -1,6 +1,6 @@
 export const SITE_TITLE = "Kyle Dickey";
 export const SITE_DESCRIPTION =
-    "Kyle Dickey, embedded software engineering intern at TerumoBCT";
+    "Kyle Dickey. Software engineer in Colorado. Go and TypeScript, embedded software at TerumoBCT, side projects under November.";
 export const SITE_URL = "https://kyle.so";
 export const KEYWORDS = [
     "Kyle Dickey",
@@ -11,7 +11,6 @@ export const KEYWORDS = [
     "engineer",
     "Colorado State University",
     "CSU",
-    "Fort Collins",
     "Colorado",
 ];
 export const AUTHOR = "Kyle Dickey";

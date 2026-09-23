@@ -30,8 +30,9 @@ const socials = [
 ];
 
 export function Navbar() {
+    // Above citation triggers (z-60), which sit above preview popups (z-50).
     return (
-        <header className="sticky top-0 z-50 w-full">
+        <header className="sticky top-0 z-[70] w-full">
             {/* Progressive blur: high blur at top, none at bottom */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 {BLUR_LAYERS.map(({ blur, stop }) => (
