@@ -1,6 +1,37 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
 @import "@fontsource/gaegu/latin-400.css";
+
+@font-face {
+    font-family: "Open Runde";
+    src: url("/fonts/open-runde/OpenRunde-Regular.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Runde";
+    src: url("/fonts/open-runde/OpenRunde-Medium.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Runde";
+    src: url("/fonts/open-runde/OpenRunde-Semibold.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Runde";
+    src: url("/fonts/open-runde/OpenRunde-Bold.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
 
 @font-face {
     font-family: "Commit Mono";
@@ -20,7 +51,7 @@
 }
 
 @theme inline {
-    --font-sans: "Inter Variable", sans-serif;
+    --font-sans: "Open Runde", sans-serif;
     --font-mono: var(--mono);
     --color-background: var(--paper);
     --color-foreground: var(--ink);
@@ -40,7 +71,7 @@ body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: "Inter Variable", sans-serif;
+    font-family: "Open Runde", sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 button {
