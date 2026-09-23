@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { Turntable } from "#/components/turntable";
+import { external } from "#/lib/external";
 
-type NowPlayingTrack = {
+export type NowPlayingTrack = {
     artist: string;
     title: string;
     url: string;
@@ -11,8 +13,23 @@ type NowPlayingTrack = {
 const WEBSOCKET_URL =
     "wss://api.kyle.so/spotify/current-track/ws?user=mrdickeyy";
 
-export function NowPlaying() {
-    const [track, setTrack] = useState<NowPlayingTrack | null>(null);
+/** A record a visitor pulled off my shelf and put on the turntable. */
+export type PickedRecord = {
+    title: string;
+    artist: string;
+    cover: string;
+    song: string | null;
+    status: string | null;
+};
+
+export function NowPlaying({
+    picked,
+    onLift,
+}: {
+    picked: PickedRecord | null;
+    onLift: () => void;
+}) {
+    const [live, setLive] = useState<NowPlayingTrack | null>(null);
 
     useEffect(() => {
         let socket: WebSocket | null = null;
@@ -21,95 +38,99 @@ export function NowPlaying() {
 
         const connect = () => {
             socket = new WebSocket(WEBSOCKET_URL);
-
             socket.onmessage = (event) => {
                 try {
                     const data = JSON.parse(event.data) as unknown;
-
-                    if (!isNowPlayingTrack(data)) {
-                        setTrack(null);
-                        return;
-                    }
-
-                    if (data.isPlaying === false) {
-                        setTrack(null);
-                        return;
-                    }
-
-                    setTrack(data);
+                    setLive(
+                        isNowPlayingTrack(data) && data.isPlaying ? data : null,
+                    );
                 } catch {
-                    setTrack(null);
+                    setLive(null);
                 }
             };
-
             socket.onerror = () => {};
-
             socket.onclose = () => {
-                if (disposed) {
-                    return;
-                }
-
+                if (disposed) return;
                 reconnectTimer = window.setTimeout(connect, 3500);
             };
         };
 
         connect();
-
         return () => {
             disposed = true;
-            if (reconnectTimer) {
-                window.clearTimeout(reconnectTimer);
-            }
+            if (reconnectTimer) window.clearTimeout(reconnectTimer);
             socket?.close();
         };
     }, []);
 
-    if (!track || !track.isPlaying) {
-        return null;
-    }
+    const track: NowPlayingTrack | null = picked
+        ? {
+              title: picked.title,
+              artist: picked.artist,
+              imageUrl: picked.cover,
+              url: "",
+              isPlaying: true,
+          }
+        : live;
 
     return (
-        <section className="mb-2">
-            <div className="inline-flex max-w-full items-center gap-3">
-                <img
-                    src={track.imageUrl}
-                    alt={`${track.title} album art`}
-                    className="size-9 shrink-0 rounded-md object-cover"
-                />
-
-                <p className="truncate text-sm text-foreground/65">
-                    <span className="text-foreground/55 font-serif">
-                        Currently listening to
-                    </span>{" "}
-                    <a
-                        href={track.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline decoration-foreground/30 underline-offset-4 transition-colors hover:text-foreground/90"
-                    >
-                        {track.title}
-                    </a>{" "}
-                    <span className="text-foreground/55 font-serif">by</span>{" "}
-                    <span className="italic text-foreground/70">
-                        {track.artist}
+        <section className="now-playing" aria-live="polite">
+            <div className="listen-visual">
+                <Turntable track={track} />
+            </div>
+            <div className="listen-text">
+                <span className="label">
+                    {picked
+                        ? "You put this on"
+                        : live
+                          ? "I’m listening to"
+                          : "The turntable"}
+                </span>
+                {track ? (
+                    <>
+                        {picked ? (
+                            <span className="listen-title">{track.title}</span>
+                        ) : (
+                            <a
+                                className="listen-title"
+                                href={track.url}
+                                {...external}
+                            >
+                                {track.title}
+                            </a>
+                        )}
+                        <span className="listen-artist">{track.artist}</span>
+                        {picked && (
+                            <span className="listen-detail">
+                                {picked.song
+                                    ? `♪ ${picked.song} (preview)`
+                                    : picked.status}
+                            </span>
+                        )}
+                    </>
+                ) : (
+                    <span className="listen-artist">
+                        Nothing on right now. Pick a record from the shelf.
                     </span>
-                </p>
+                )}
+                {picked && (
+                    <button
+                        type="button"
+                        className="listen-lift"
+                        onClick={onLift}
+                    >
+                        {live ? "back to what I’m playing" : "lift the needle"}
+                    </button>
+                )}
             </div>
         </section>
     );
 }
 
 function isNowPlayingTrack(value: unknown): value is NowPlayingTrack {
-    if (!value || typeof value !== "object") {
-        return false;
-    }
-
+    if (!value || typeof value !== "object") return false;
     const track = value as Partial<NowPlayingTrack> & { error?: unknown };
-
-    if (typeof track.error === "string") {
-        return false;
-    }
-
+    if (typeof track.error === "string") return false;
     return (
         typeof track.artist === "string" &&
         typeof track.title === "string" &&

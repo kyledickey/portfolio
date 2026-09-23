@@ -1,115 +1,1038 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
-@import "tw-animate-css";
-
-@import '@fontsource/gaegu';
+@import "@fontsource-variable/inter";
+@import "@fontsource/gaegu/latin-400.css";
 
 @font-face {
     font-family: "Commit Mono";
     src: url("/fonts/commit-mono-vf.woff2") format("woff2");
     font-weight: 100 900;
-    font-style: normal;
     font-display: swap;
 }
 
 :root {
-    --background: #00311a;
-    --foreground: #eee8d5;
-    --card: #002c16;
-    --card-foreground: #eee8d5;
-    --popover: #003d20;
-    --popover-foreground: #eee8d5;
-    --primary: #4db870;
-    --primary-foreground: #001a0d;
-    --secondary: #00321a;
-    --secondary-foreground: #b8d4b0;
-    --muted: #002d17;
-    --muted-foreground: #6b9e7a;
-    --accent: #005030;
-    --accent-foreground: #eee8d5;
-    --destructive: #c0392b;
-    --destructive-foreground: #ffffff;
-    --border: #1a5c38;
-    --input: #1a5c38;
-    --ring: #4db870;
-    --radius: 0.75rem;
-
-    --accent-yellow: #d4af37;
-    --accent-green: #4db870;
-    --accent-orange: #c4622d;
-    --accent-red: #a63d2f;
-    --accent-purple: #7c5cbf;
+    --paper: #f7f7f2;
+    --ink: #30322f;
+    --blue: #313dee;
+    --muted: #74766e;
+    --line: #ddded4;
+    --mono: "Commit Mono", ui-monospace, monospace;
+    --hand: "Gaegu", cursive;
 }
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-card: var(--card);
-    --color-card-foreground: var(--card-foreground);
-    --color-popover: var(--popover);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-primary: var(--primary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--secondary);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-accent: var(--accent);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-destructive: var(--destructive);
-    --color-destructive-foreground: var(--destructive-foreground);
-    --color-border: var(--border);
-    --color-input: var(--input);
-    --color-ring: var(--ring);
-    --color-accent-yellow: var(--accent-yellow);
-    --color-accent-green: var(--accent-green);
-    --color-accent-orange: var(--accent-orange);
-    --color-accent-red: var(--accent-red);
-    --color-accent-purple: var(--accent-purple);
-    --radius: var(--radius);
-    --font-sans: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
-    --font-mono: "Commit Mono", "SFMono-Regular", Consolas, monospace;
-    --font-serif: "Gaegu", serif;
+    --font-sans: "Inter Variable", sans-serif;
+    --font-mono: var(--mono);
+    --color-background: var(--paper);
+    --color-foreground: var(--ink);
+    --color-primary: var(--blue);
+    --color-primary-foreground: var(--paper);
 }
 
-/* Webkit scrollbar */
-::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-}
+/* Base */
 
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--muted-foreground);
-}
-
-/* Firefox */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter Variable", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    color: var(--blue);
+}
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 5px;
+}
+::selection {
+    background: var(--blue);
+    color: white;
 }
 
-@layer base {
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+.skip-link {
+    position: fixed;
+    top: -60px;
+    left: 16px;
+    z-index: 10;
+    padding: 12px;
+    background: var(--paper);
+}
+.skip-link:focus {
+    top: 12px;
+}
+
+/* Frame */
+
+.page {
+    max-width: 1040px;
+    margin: auto;
+    padding: 0 40px;
+}
+
+.masthead {
+    height: 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: 11px var(--mono);
+}
+.masthead > span {
+    color: var(--muted);
+}
+.masthead nav {
+    display: flex;
+    gap: 22px;
+}
+
+.label {
+    margin: 0 0 22px;
+    color: var(--blue);
+    font: 11px var(--mono);
+}
+
+/* Print */
+
+.print {
+    margin: 0;
+}
+.print-stage {
+    position: relative;
+}
+.print-stage canvas {
+    display: block;
+    width: 100%;
+    height: min(420px, 58vh);
+    image-rendering: pixelated;
+}
+.print-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    font: 11px var(--mono);
+    color: var(--muted);
+}
+.print-patterns {
+    display: flex;
+    gap: 2px;
+}
+.print-patterns button {
+    padding: 4px 8px;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+}
+.print-patterns button:hover {
+    color: var(--blue);
+}
+.print-patterns button[aria-pressed="true"] {
+    background: var(--blue);
+    color: var(--paper);
+}
+.print-hours {
+    display: flex;
+    gap: 2px;
+}
+.print-hours button {
+    padding: 4px 8px;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+}
+.print-hours button:hover {
+    color: var(--blue);
+}
+.print-hours button[aria-pressed="true"] {
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.print-note {
+    font: 18px/1 var(--hand);
+    color: var(--blue);
+}
+
+/* Text */
+
+main p a {
+    text-decoration: underline;
+    text-decoration-color: #b9bbb0;
+    text-underline-offset: 4px;
+}
+main p a:hover {
+    text-decoration-color: currentColor;
+}
+
+.prose {
+    max-width: 600px;
+    margin-inline: auto;
+}
+.intro {
+    margin-top: 64px;
+}
+.intro p {
+    margin: 0 0 22px;
+    font-size: 16px;
+    line-height: 1.85;
+    letter-spacing: -0.25px;
+}
+.intro-name {
+    margin: 0 0 14px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: var(--blue);
+}
+.intro .opening {
+    font-size: 25px;
+    line-height: 1.5;
+    letter-spacing: -0.8px;
+}
+
+/* Pennant */
+
+.nowrap {
+    white-space: nowrap;
+}
+.pennant {
+    display: inline-block;
+    width: 45px;
+    height: 24px;
+    margin: 0 1px 0 2px;
+    vertical-align: -6px;
+    image-rendering: pixelated;
+}
+
+/* Projects */
+
+.shelf {
+    margin-top: 72px;
+}
+.shelf > .label {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.wall {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 44px 30px;
+}
+.card {
+    position: relative;
+    z-index: 1;
+    padding: 12px 12px 16px;
+    cursor: grab;
+    touch-action: auto;
+    user-select: none;
+    transform: translate(var(--dx, 0px), calc(var(--drop) + var(--dy, 0px)))
+        rotate(var(--tilt));
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+.card::before {
+    z-index: -1;
+    background: var(--paper);
+    box-shadow: 0 0 0 1px var(--ink);
+}
+.card::after {
+    z-index: -2;
+    translate: 7px 7px;
+    background: repeating-conic-gradient(var(--blue) 0 25%, transparent 0 50%)
+        0 0 / 4px 4px;
+    transition: translate 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover,
+.card:focus-within {
+    transform: translate(var(--dx, 0px), calc(var(--drop) + var(--dy, 0px) - 4px))
+        rotate(0deg);
+}
+.card:hover::after {
+    translate: 10px 11px;
+}
+.card[data-raised="true"] {
+    z-index: 5;
+}
+.card[data-grabbed="true"] {
+    z-index: 10;
+    cursor: grabbing;
+    transition: none;
+    transform: translate(var(--dx, 0px), calc(var(--drop) + var(--dy, 0px)))
+        rotate(calc(var(--tilt) * -1.5)) scale(1.04);
+}
+.card[data-grabbed="true"]::after {
+    translate: 14px 16px;
+}
+.card-link {
+    display: block;
+    cursor: inherit;
+}
+.card-link:focus-visible {
+    outline-offset: 8px;
+}
+.card-sprite {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    image-rendering: pixelated;
+    border-bottom: 1px solid var(--line);
+}
+.card-name {
+    display: block;
+    margin-top: 8px;
+    font: 27px/1.1 var(--hand);
+    color: var(--blue);
+}
+.card-link:hover .card-name {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+}
+.card-line {
+    margin: 6px 0 0;
+    font-size: 13px;
+    line-height: 1.55;
+    letter-spacing: -0.1px;
+}
+.card-note {
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    padding: 0 7px;
+    font: 18px/1.4 var(--hand);
+    color: var(--paper);
+    background: var(--blue);
+    transform: rotate(-4deg);
+    pointer-events: none;
+}
+
+.smaller {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--muted);
+}
+.smaller a {
+    color: var(--ink);
+}
+.smaller a:hover {
+    color: var(--blue);
+}
+
+.turntable {
+    position: relative;
+    z-index: 0;
+    flex: none;
+}
+.turntable::after {
+    content: "";
+    position: absolute;
+    inset: 112px 0 0;
+    z-index: -1;
+    translate: 7px 7px;
+    background: repeating-conic-gradient(var(--blue) 0 25%, transparent 0 50%)
+        0 0 / 4px 4px;
+}
+.turntable canvas {
+    display: block;
+    width: 264px;
+    height: 312px;
+    image-rendering: pixelated;
+    cursor: grab;
+    touch-action: none;
+}
+.turntable canvas:active {
+    cursor: grabbing;
+}
+
+/* Records */
+
+.records-section,
+.films-section {
+    max-width: 860px;
+    margin: 104px auto 0;
+}
+.records-section > .label,
+.films-section > .label {
+    margin-bottom: 34px;
+    text-align: center;
+}
+/* The player and the shelf side by side: same footprint, text underneath. */
+.listening {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+}
+.now-playing,
+.records {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.listen-visual {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 320px;
+}
+.listen-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 22px;
+}
+.listen-text .label {
+    margin: 0 0 4px;
+}
+.listen-title {
+    font: 26px/1.15 var(--hand);
+    color: var(--blue);
+}
+a.listen-title:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+}
+.listen-artist {
+    font-size: 15px;
+}
+.listen-detail {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.sleeve-stage {
+    position: relative;
+    isolation: isolate;
+    width: 240px;
+    height: 240px;
+    margin-right: 100px;
+}
+.disc {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 224px;
+    height: 224px;
+    image-rendering: pixelated;
+    border-radius: 50%;
+    transition: translate 0.28s cubic-bezier(0.5, 0, 0.3, 1);
+}
+.sleeve-stage[data-out="true"] .disc {
+    translate: 100px 0;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-duration: 0.5s;
+}
+.sleeve {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: var(--paper);
+    box-shadow: 0 0 0 1px var(--ink);
+}
+.sleeve::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    translate: 7px 7px;
+    background: repeating-conic-gradient(var(--blue) 0 25%, transparent 0 50%)
+        0 0 / 4px 4px;
+}
+.sleeve img,
+.sleeve canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+.sleeve canvas {
+    transition: opacity 0.5s ease;
+}
+.sleeve:hover canvas,
+.sleeve:focus-visible canvas {
+    opacity: 0;
+}
+.records-controls {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 22px;
+}
+.records-controls .records-play {
+    color: var(--blue);
+}
+.listen-lift {
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 2px 0;
+    border: 0;
+    background: none;
+    font: 11px var(--mono);
+    color: var(--muted);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 4px;
+}
+.listen-lift:hover {
+    color: var(--blue);
+}
+/* Fixed, so swapping what's playing never nudges the page. */
+.now-playing .listen-text {
+    height: 132px;
+}
+.records-count {
+    margin-left: auto;
+    font: 10px var(--mono);
+    color: var(--muted);
+}
+.records-controls + .listen-text {
+    margin-top: 16px;
+    /* Fixed, so flipping records never nudges the rest of the page. */
+    height: 132px;
+    overflow: hidden;
+}
+.records .listen-title,
+.records .listen-detail {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.records .listen-detail {
+    -webkit-line-clamp: 2;
+}
+
+.records-controls button,
+.cursor-maker-tools button {
+    padding: 2px 0;
+    border: 0;
+    background: none;
+    font: 11px var(--mono);
+    color: var(--muted);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 4px;
+}
+.records-controls button:hover,
+.cursor-maker-tools button:hover {
+    color: var(--blue);
+    text-decoration-color: currentColor;
+}
+.cursor-maker-tools button[aria-pressed="true"] {
+    color: var(--blue);
+    text-decoration: none;
+}
+.cursor-maker-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+}
+
+/* Films */
+
+.films {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 40px;
+}
+/* The TV and the pile share a stand: one board, one dithered shadow. */
+.films-stand {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 28px;
+    padding: 0 18px 2px;
+    border-bottom: 2px solid var(--ink);
+}
+.films-stand::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    right: -7px;
+    bottom: -9px;
+    height: 7px;
+    background: repeating-conic-gradient(var(--blue) 0 25%, transparent 0 50%)
+        0 0 / 4px 4px;
+}
+.films-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 250px;
+    /* Fixed, so swapping tapes never nudges the page. */
+    height: 190px;
+}
+.films-text .label {
+    margin: 0 0 4px;
+}
+.films-text .listen-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+.films-more {
+    margin-top: auto;
+    font: 11px var(--mono);
+    color: var(--blue);
+}
+.television {
+    position: relative;
+    flex: none;
+}
+.television canvas {
+    display: block;
+    width: 280px;
+    height: 312px;
+    image-rendering: pixelated;
+}
+.tv-glass {
+    position: absolute;
+    left: 24px;
+    top: 96px;
+    width: 188px;
+    height: 148px;
+    overflow: hidden;
+    border-radius: 14px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+.tv-glass img {
+    display: block;
+    width: 100%;
+}
+.tv-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        transparent 0 2px,
+        rgb(0 0 0 / 0.14) 2px 4px
+    );
+}
+.television:hover .tv-glass {
+    opacity: 1;
+}
+.tape-pile {
+    position: relative;
+    flex: none;
+    width: 264px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.tape {
+    position: absolute;
+    left: 0;
+    translate: var(--nudge) 0;
+    rotate: var(--tilt);
+    /* Dropping into a gap: slow to start, like it's falling. */
+    transition:
+        bottom 0.3s cubic-bezier(0.55, 0, 0.9, 0.5) 0.22s,
+        translate 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.25s ease;
+}
+/* Pulled off toward the VCR. */
+.tape[data-state="out"] {
+    translate: calc(var(--nudge) - 90px) 0;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        translate 0.35s cubic-bezier(0.5, 0, 0.75, 0),
+        opacity 0.3s ease 0.05s;
+}
+/* Back out of the VCR: jumps to the top unseen, then slides on. */
+.tape[data-state="back"] {
+    transition:
+        translate 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
+        opacity 0.2s ease 0.5s;
+}
+.tape button {
+    position: relative;
+    display: block;
+    width: 264px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transition: translate 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tape button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    translate: 5px 5px;
+    background: repeating-conic-gradient(var(--blue) 0 25%, transparent 0 50%)
+        0 0 / 4px 4px;
+}
+.tape button:hover,
+.tape button:focus-visible {
+    translate: -12px 0;
+}
+.tape-shell {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+.tape-label {
+    position: absolute;
+    left: 34px;
+    right: 26px;
+    top: 5px;
+    bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    background: var(--paper);
+    box-shadow: 0 0 0 1px var(--blue);
+    rotate: calc(var(--tilt) * -0.6);
+}
+.tape-title {
+    flex: 1;
+    overflow: hidden;
+    text-align: left;
+    font: 20px/1 var(--hand);
+    color: var(--blue);
+    white-space: nowrap;
+}
+.tape button:hover .tape-title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+.tape-year {
+    font: 9px var(--mono);
+    color: var(--muted);
+}
+
+/* Pond */
+
+.pond {
+    display: block;
+    width: 100%;
+    height: 270px;
+    margin-top: 72px;
+    image-rendering: pixelated;
+    cursor: pointer;
+}
+
+.wall-more {
+    display: block;
+    width: fit-content;
+    margin: 24px auto 0;
+    font: 12px var(--mono);
+    color: var(--blue);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 5px;
+}
+.wall-more:hover {
+    text-decoration-color: currentColor;
+}
+
+.drawer {
+    margin-top: 40px;
+}
+
+/* Cursor maker */
+
+.pond-bank {
+    display: flex;
+    justify-content: center;
+    margin-top: 96px;
+}
+
+.cursor-maker {
+    position: relative;
+}
+.cursor-toggle {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: 22px/1 var(--hand);
+    color: var(--blue);
+    transform: rotate(-2deg);
+}
+.cursor-toggle:hover,
+.cursor-toggle[aria-expanded="true"] {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+}
+.cursor-panel {
+    position: absolute;
+    bottom: calc(100% + 18px);
+    left: 50%;
+    translate: -50% 0;
+    z-index: 30;
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    width: max-content;
+    padding: 14px;
+    transform: rotate(-1deg);
+}
+.cursor-panel[hidden] {
+    display: none;
+}
+.cursor-panel::before,
+.cursor-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+.cursor-panel::before {
+    z-index: -1;
+    background: var(--paper);
+    box-shadow: 0 0 0 1px var(--ink);
+}
+.cursor-panel::after {
+    z-index: -2;
+    translate: 7px 7px;
+    background: repeating-conic-gradient(var(--blue) 0 25%, transparent 0 50%)
+        0 0 / 4px 4px;
+}
+.cursor-pad canvas {
+    display: block;
+    width: 128px;
+    height: 128px;
+    image-rendering: pixelated;
+    background: radial-gradient(circle, var(--line) 0.8px, transparent 1.2px) 0
+        0 / 12.5% 12.5%;
+    box-shadow: 0 0 0 1px var(--line);
+    touch-action: none;
+}
+.cursor-maker-side {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 150px;
+}
+.cursor-maker-note {
+    font: 10px/1.5 var(--mono);
+    color: var(--muted);
+}
+.cursor-maker-tools {
+    margin-top: 8px;
+}
+
+/* 404 */
+
+.lost {
+    max-width: 800px;
+    margin: 48px auto 0;
+}
+.lost p {
+    max-width: 520px;
+    margin: 0 0 28px;
+    font-size: 16px;
+    line-height: 1.7;
+}
+.duck-walk canvas {
+    display: block;
+    width: 100%;
+    aspect-ratio: 200 / 80;
+    image-rendering: pixelated;
+}
+/* Only touch screens need the buttons. */
+.duck-controls {
+    display: none;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+.lost .lost-keys {
+    margin: 12px 0 0;
+    font: 11px var(--mono);
+    color: var(--muted);
+}
+@media (hover: none) {
+    .duck-controls {
+        display: flex;
+    }
+    .lost .lost-keys {
+        display: none;
+    }
+}
+.duck-controls button {
+    min-width: 64px;
+    padding: 12px 16px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    font: 13px var(--mono);
+    color: var(--blue);
+    touch-action: none;
+    user-select: none;
+}
+.duck-controls button:active {
+    background: var(--blue);
+    color: var(--paper);
+}
+.lost-skip {
+    display: inline-block;
+    margin-top: 22px;
+    font: 11px var(--mono);
+    color: var(--blue);
+}
+
+/* Small screens */
+
+@media (max-width: 600px) {
+}
+
+@media (max-width: 600px) {
+    .page {
+        padding: 0 16px;
+    }
+    .masthead {
+        height: 58px;
+    }
+    .masthead nav {
+        gap: 14px;
+    }
+    .print-note {
+        display: none;
+    }
+    .print-stage canvas {
+        height: 320px;
+    }
+    .intro {
+        margin-top: 40px;
+    }
+    .intro-name {
+    margin: 0 0 14px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: var(--blue);
+}
+.intro .opening {
+        font-size: 21px;
+    }
+    .intro p {
+        font-size: 15px;
+    }
+        .wall {
+        grid-template-columns: 1fr;
+        gap: 26px;
+    }
+    .card {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        column-gap: 14px;
+        align-items: start;
+        transform: rotate(calc(var(--tilt) * 0.4));
+    }
+    .card:hover,
+    .card:focus-within {
+        transform: rotate(calc(var(--tilt) * 0.4));
+    }
+    .card-link {
+        display: contents;
+    }
+    .card-sprite {
+        grid-row: 1 / span 2;
+        border: 0;
+    }
+    .card-name {
+        margin-top: 0;
+        font-size: 24px;
+    }
+    .card-line {
+        grid-column: 2;
+    }
+        .listening {
+        grid-template-columns: 1fr;
+        gap: 64px;
+    }
+    .films {
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+    .films-stand {
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        width: 100%;
+    }
+    .films-text {
+        width: 100%;
+        max-width: 320px;
+        height: 170px;
+    }
+    .sleeve-stage {
+        width: 200px;
+        height: 200px;
+        margin-right: 80px;
+    }
+    .disc {
+        width: 184px;
+        height: 184px;
+    }
+    .sleeve-stage[data-out="true"] .disc {
+        translate: 80px 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
     * {
-        @apply border-border outline-ring/50;
-    }
-
-    html,
-    body,
-    #app {
-        min-height: 100%;
-    }
-
-    body {
-        @apply bg-background text-foreground antialiased;
-        font-family: var(--font-sans);
+        transition: none !important;
     }
 }
