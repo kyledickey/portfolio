@@ -233,7 +233,7 @@ export function Turntable({ track }: { track: NowPlayingTrack | null }) {
     };
 
     return (
-        <span className="turntable">
+        <span className="turntable" data-spinning={spinning || undefined}>
             <canvas
                 ref={canvasRef}
                 width={WIDTH}

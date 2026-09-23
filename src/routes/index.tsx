@@ -7,6 +7,7 @@ import { Listening } from "#/components/listening";
 import { Pennant } from "#/components/pennant";
 import { Pond } from "#/components/pond";
 import { ProjectWall } from "#/components/project-wall";
+import { Roommate } from "#/components/roommate";
 import { external } from "#/lib/external";
 import { projects, smallerThings } from "#/lib/projects";
 
@@ -127,6 +128,7 @@ function Home() {
                 </div>
             </div>
             <Pond />
+            <Roommate />
         </>
     );
 }

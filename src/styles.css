@@ -879,6 +879,33 @@ a.listen-title:hover {
     cursor: pointer;
 }
 
+/* The roommate */
+
+.roommate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    width: 64px;
+    height: 64px;
+    pointer-events: none;
+}
+.roommate canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+.roommate-hit {
+    position: absolute;
+    top: 8px;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
 .wall-more {
     display: block;
     width: fit-content;
