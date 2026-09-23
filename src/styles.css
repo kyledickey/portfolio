@@ -189,29 +189,6 @@ body::after {
     background: var(--blue);
     color: var(--paper);
 }
-.print-hours {
-    display: flex;
-    gap: 2px;
-}
-.print-hours button {
-    padding: 4px 8px;
-    border: 0;
-    background: none;
-    color: var(--muted);
-    font: inherit;
-}
-.print-hours button:hover {
-    color: var(--blue);
-}
-.print-hours button[aria-pressed="true"] {
-    color: var(--blue);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-.print-note {
-    font: 18px/1 var(--hand);
-    color: var(--blue);
-}
 
 /* Text */
 
@@ -973,9 +950,6 @@ a.listen-title:hover {
     }
     .masthead nav {
         gap: 14px;
-    }
-    .print-note {
-        display: none;
     }
     .print-stage canvas {
         height: 320px;

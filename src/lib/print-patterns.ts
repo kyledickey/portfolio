@@ -6,7 +6,6 @@ export type Painter = (t: number, tone: Float32Array) => void;
 
 type Pattern = {
     label: string;
-    caption: string;
     create: (width: number, height: number) => Painter;
 };
 
@@ -41,7 +40,6 @@ function fbm(x: number, y: number) {
 
 const marble: Pattern = {
     label: "marble",
-    caption: "ink dropped in water",
     create: (width, height) => {
         const scale = 3.2 / height;
         return (t, tone) => {
@@ -69,7 +67,6 @@ const marble: Pattern = {
 
 const moire: Pattern = {
     label: "moiré",
-    caption: "two sets of rings, overlapping",
     create: (width, height) => (t, tone) => {
         const a = {
             x: width * (0.35 + Math.sin(t * 0.23) * 0.2),
@@ -94,7 +91,6 @@ const moire: Pattern = {
 
 const tiles: Pattern = {
     label: "tiles",
-    caption: "truchet tiles, flipping",
     create: (width, height) => {
         const cell = Math.max(6, Math.round(height / 7));
         return (t, tone) => {
@@ -127,7 +123,6 @@ const tiles: Pattern = {
 
 const life: Pattern = {
     label: "life",
-    caption: "conway’s game of life",
     create: (width, height) => {
         // Cells are 2×2 print pixels, so they read as cells and not static.
         const w = Math.ceil(width / 2);
@@ -247,9 +242,8 @@ const RANGES: Range[] = [
     },
 ];
 
-export const peaks: Pattern = {
+const peaks: Pattern = {
     label: "peaks",
-    caption: "the mountains, on Colorado time",
     create: (width, height) => {
         // Each range is a loop of distinct peaks, a bit wider than the print
         // so it can drift past forever.

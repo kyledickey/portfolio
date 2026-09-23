@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { PREVIEW_HOURS, previewHour } from "#/lib/colorado-time";
 import { INK, PAPER, threshold } from "#/lib/pixels";
-import { PATTERNS, type Painter, peaks } from "#/lib/print-patterns";
+import { PATTERNS, type Painter } from "#/lib/print-patterns";
 
 /** Pattern pixels are this many CSS pixels wide; finer on small screens. */
 const grain = (width: number) => (width < 600 ? 2 : 3);
@@ -12,7 +11,6 @@ const STORAGE_KEY = "print-pattern";
 export function CobaltPrint() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [choice, setChoice] = useState(0);
-    const [hour, setHour] = useState<number | null>(null);
     const pattern = PATTERNS[choice];
 
     useEffect(() => {
@@ -122,25 +120,6 @@ export function CobaltPrint() {
                         </button>
                     ))}
                 </div>
-                {pattern === peaks ? (
-                    <div className="print-hours">
-                        {PREVIEW_HOURS.map((item) => (
-                            <button
-                                key={item.label}
-                                type="button"
-                                aria-pressed={hour === item.hour}
-                                onClick={() => {
-                                    previewHour(item.hour);
-                                    setHour(item.hour);
-                                }}
-                            >
-                                {item.label}
-                            </button>
-                        ))}
-                    </div>
-                ) : (
-                    <span className="print-note">{pattern.caption}</span>
-                )}
             </figcaption>
         </figure>
     );
