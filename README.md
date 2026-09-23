@@ -1,7 +1,15 @@
-# Portfolio v10
+# Portfolio v11
 
-_and counting_
+[kyle.so](https://kyle.so), built with React, TanStack Start, and Tailwind CSS.
 
-[Visit it here (kyle.so)](https://kyle.so)
+```sh
+bun install
+bun run dev
+```
 
-Built with [Tanstack Start](https://tanstack.com/start) & [TailwindCSS](https://tailwindcss.com/).
+The dev server listens on port 3000. Run `bun run check` and
+`bun run typecheck` before committing. `bun run build` produces the production
+server, which runs with `bun run start`.
+
+Page composition lives in `src/routes`, interactive UI in `src/components`, and
+project/film data, pixel drawing, and print patterns in `src/lib`.
