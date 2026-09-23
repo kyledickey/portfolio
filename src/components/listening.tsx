@@ -32,7 +32,6 @@ async function findSongs(artist: string, album: string): Promise<Song[]> {
         }));
 }
 
-/** The turntable and my shelf, sharing whatever record is on the platter. */
 export function Listening() {
     const [picked, setPicked] = useState<PickedRecord | null>(null);
     const audio = useRef<HTMLAudioElement | null>(null);
@@ -43,7 +42,6 @@ export function Listening() {
         pick.current++;
         audio.current?.pause();
     };
-    // Stop the music if the page goes away mid-song.
     useEffect(
         () => () => {
             pick.current++;
@@ -71,7 +69,6 @@ export function Listening() {
                     });
                     return;
                 }
-                // Play the album's previews in order, one after another.
                 const playSong = (index: number) => {
                     if (id !== pick.current) return;
                     const song = songs[index % songs.length];

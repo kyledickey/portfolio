@@ -4,7 +4,6 @@ import { external } from "#/lib/external";
 import type { Project } from "#/lib/projects";
 import { sprites } from "#/lib/sprites";
 
-// Pinned up by hand, so nothing sits quite straight.
 const TILT = [-2.5, 1.5, -1, 2.5, -2, 1, -1.5, 2, -0.5, 1.8];
 const DROP = [0, 18, -6, 24, 8, -10, 16, 0, 22, -4];
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { coloradoHour, darkness } from "#/components/cobalt-print";
-import { drawDuck } from "#/components/duck-walk";
+import { coloradoHour, darkness } from "#/lib/colorado-time";
+import { drawDuck } from "#/lib/duck-sprite";
 import { hash, INK, PAPER, threshold } from "#/lib/pixels";
 import { drawRam } from "#/lib/ram-sprite";
 

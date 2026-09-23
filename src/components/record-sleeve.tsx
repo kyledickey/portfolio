@@ -7,7 +7,6 @@ const COVER = 120;
 /** The record, in pixels; also shown at twice this size. */
 const DISC = 112;
 const LABEL = 18;
-/** How long the record takes to slide back into its sleeve. */
 const SLIDE_MS = 280;
 
 type Release = {
@@ -43,11 +42,6 @@ function toAlbum(release: Release): Album {
     };
 }
 
-/**
- * My record collection, one at a time: the sleeve, with the record pulled
- * halfway out. Flipping slides the record back in, swaps the sleeve, and
- * pulls the next one out.
- */
 export function RecordSleeve({
     onPlay,
 }: {
@@ -151,7 +145,6 @@ export function RecordSleeve({
     );
 }
 
-/** The sleeve art: dithered in cobalt, real colors on hover. */
 function Cover({ src }: { src?: string }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     useEffect(() => {
@@ -175,7 +168,6 @@ function Cover({ src }: { src?: string }) {
     );
 }
 
-/** The record itself: grooves, a band of light, and the cover as its label. */
 function Disc({ cover }: { cover?: string }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     useEffect(() => {

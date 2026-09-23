@@ -10,7 +10,6 @@ const LETTERS = [
     ["#.#", "#.#", "#.#", "#.#", "###"],
 ];
 
-/** A tiny CSU pennant that flaps in the breeze, harder when hovered. */
 export function Pennant() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [windy, setWindy] = useState(false);

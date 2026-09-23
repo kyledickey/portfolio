@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useId } from "react";
+import { Fragment, useId } from "react";
 import { CobaltPrint } from "#/components/cobalt-print";
 import { CursorMaker } from "#/components/cursor-maker";
 import { Films } from "#/components/films";
@@ -75,7 +75,7 @@ function Home() {
                                 Plus some smaller stuff:{" "}
                                 {smallerThings.map((thing, i) => {
                                     return (
-                                        <>
+                                        <Fragment key={thing.url}>
                                             <a href={thing.url} {...external}>
                                                 {thing.name}
                                             </a>{" "}
@@ -85,7 +85,7 @@ function Home() {
                                                 : i === smallerThings.length - 2
                                                   ? ", and there's a "
                                                   : ", "}{" "}
-                                        </>
+                                        </Fragment>
                                     );
                                 })}
                             </p>
@@ -123,7 +123,6 @@ function Home() {
                     <CursorMaker />
                 </div>
             </div>
-            {/* The pond runs the full width of the window, so it sits outside the page. */}
             <Pond />
         </>
     );

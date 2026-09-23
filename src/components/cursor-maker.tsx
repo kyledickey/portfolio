@@ -5,7 +5,6 @@ const SIZE = 16;
 const STORAGE_KEY = "drawn-cursor";
 const STYLE_ID = "drawn-cursor";
 
-// Starts as a plain arrow, so it's obvious what you're drawing.
 const ARROW = [
     "................",
     ".#..............",
@@ -72,10 +71,6 @@ function applyCursor(cells: Uint8Array | null) {
     document.head.append(style);
 }
 
-/**
- * A 16×16 pad for drawing your own mouse cursor. It only ever lives in your
- * browser; nothing gets sent anywhere.
- */
 export function CursorMaker() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const cells = useRef(arrow());
@@ -85,7 +80,6 @@ export function CursorMaker() {
     const [open, setOpen] = useState(false);
     const rootRef = useRef<HTMLDivElement>(null);
 
-    // Close on a click elsewhere or Escape.
     useEffect(() => {
         if (!open) return;
         const away = (event: PointerEvent) => {

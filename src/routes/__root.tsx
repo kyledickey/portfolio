@@ -12,8 +12,8 @@ import {
     SITE_DESCRIPTION,
     SITE_TITLE,
     SITE_URL,
-} from "../lib/site";
-import appCss from "../styles.css?url";
+} from "#/lib/site";
+import appCss from "#/styles.css?url";
 
 export const Route = createRootRoute({
     head: () => ({

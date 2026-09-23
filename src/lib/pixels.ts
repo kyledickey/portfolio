@@ -181,27 +181,6 @@ export function loadTones(src: string, width: number, height: number) {
     return pending;
 }
 
-/** Dithers a grid of tones straight into a canvas's pixels. */
-export function paintTones(
-    context: CanvasRenderingContext2D,
-    tones: Float32Array,
-    width: number,
-    height: number,
-) {
-    const pixels = context.createImageData(width, height);
-    for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-            const index = y * width + x;
-            const color = tones[index] > threshold(x, y) ? INK : PAPER;
-            pixels.data[index * 4] = color[0];
-            pixels.data[index * 4 + 1] = color[1];
-            pixels.data[index * 4 + 2] = color[2];
-            pixels.data[index * 4 + 3] = 255;
-        }
-    }
-    context.putImageData(pixels, 0, 0);
-}
-
 /**
  * Floyd–Steinberg dithering: each pixel's rounding error is pushed onto its
  * neighbors. Much better than the ordered pattern at keeping photos

@@ -65,7 +65,6 @@ button:focus-visible {
     color: white;
 }
 
-/* Paper grain, laid over everything and never in the way. */
 body::after {
     content: "";
     position: fixed;
@@ -118,7 +117,7 @@ body::after {
     font: 11px var(--mono);
 }
 
-/* The print */
+/* Print */
 
 .print {
     margin: 0;
@@ -220,7 +219,7 @@ main p a:hover {
     letter-spacing: -0.8px;
 }
 
-/* The little CSU pennant in the intro */
+/* Pennant */
 
 .nowrap {
     white-space: nowrap;
@@ -234,7 +233,7 @@ main p a:hover {
     image-rendering: pixelated;
 }
 
-/* The wall of projects */
+/* Projects */
 
 .shelf {
     margin-top: 72px;
@@ -262,7 +261,6 @@ main p a:hover {
         rotate(var(--tilt));
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* The paper face, and a dithered shadow under it. */
 .card::before,
 .card::after {
     content: "";
@@ -345,8 +343,6 @@ main p a:hover {
     pointer-events: none;
 }
 
-/* After the wall */
-
 .smaller {
     margin: 0;
     font-size: 14px;
@@ -365,7 +361,6 @@ main p a:hover {
     z-index: 0;
     flex: none;
 }
-/* The same dithered shadow the cards have. */
 .turntable::after {
     content: "";
     position: absolute;
@@ -386,7 +381,6 @@ main p a:hover {
 .turntable canvas:active {
     cursor: grabbing;
 }
-
 
 /* Records */
 
@@ -446,7 +440,6 @@ a.listen-title:hover {
     color: var(--muted);
 }
 
-/* A sleeve with the record pulled halfway out of it. */
 .sleeve-stage {
     position: relative;
     isolation: isolate;
@@ -556,7 +549,6 @@ a.listen-title:hover {
     -webkit-line-clamp: 2;
 }
 
-/* Small text buttons, used by the records and the cursor maker. */
 .records-controls button,
 .cursor-maker-tools button {
     padding: 2px 0;
@@ -583,7 +575,7 @@ a.listen-title:hover {
     gap: 4px 14px;
 }
 
-/* Films: the TV, a pile of tapes, and what's in the VCR */
+/* Films */
 
 .films {
     display: flex;
@@ -642,7 +634,6 @@ a.listen-title:hover {
     height: 312px;
     image-rendering: pixelated;
 }
-/* The real poster, behind the glass, for when you lean in. */
 .tv-glass {
     position: absolute;
     left: 24px;
@@ -735,7 +726,6 @@ a.listen-title:hover {
     height: 100%;
     image-rendering: pixelated;
 }
-/* A handwritten label, stuck on a little crooked. */
 .tape-label {
     position: absolute;
     left: 34px;
@@ -768,7 +758,7 @@ a.listen-title:hover {
     color: var(--muted);
 }
 
-/* The pond, across the bottom of the window */
+/* Pond */
 
 .pond {
     display: block;
@@ -778,8 +768,6 @@ a.listen-title:hover {
     image-rendering: pixelated;
     cursor: pointer;
 }
-
-/* Under the wall */
 
 .wall-more {
     display: block;
@@ -795,13 +783,11 @@ a.listen-title:hover {
     text-decoration-color: currentColor;
 }
 
-/* The drawer, under the wall */
-
 .drawer {
     margin-top: 40px;
 }
 
-/* Cursor maker: a handwritten note on the bank above the pond */
+/* Cursor maker */
 
 .pond-bank {
     display: flex;
@@ -842,7 +828,6 @@ a.listen-title:hover {
 .cursor-panel[hidden] {
     display: none;
 }
-/* The paper face, and a dithered shadow under it, like the cards. */
 .cursor-panel::before,
 .cursor-panel::after {
     content: "";
