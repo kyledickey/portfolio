@@ -1,4 +1,3 @@
-import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { drawDuck } from "#/lib/duck-sprite";
 import { hash, INK, PAPER, threshold } from "#/lib/pixels";
@@ -43,7 +42,6 @@ export function DuckWalk() {
     const keys = useRef({ left: false, right: false, jump: false });
     // When jump was last pressed, so a quick tap between frames still counts.
     const jumpAt = useRef(0);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -122,7 +120,7 @@ export function DuckWalk() {
 
             if (!home && duck.x + BOX.dx + BOX.w / 2 > HOME.x + 4) {
                 home = true;
-                window.setTimeout(() => navigate({ to: "/" }), 500);
+                window.setTimeout(() => window.location.assign("/"), 500);
             }
         };
 
@@ -235,7 +233,7 @@ export function DuckWalk() {
             window.removeEventListener("keydown", onDown);
             window.removeEventListener("keyup", onUp);
         };
-    }, [navigate]);
+    }, []);
 
     const hold = (key: "left" | "right" | "jump") => ({
         onPointerDown: (event: React.PointerEvent) => {

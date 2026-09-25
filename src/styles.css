@@ -96,6 +96,10 @@ button:focus-visible {
     color: white;
 }
 
+#root {
+    display: contents;
+}
+
 body::after {
     content: "";
     position: fixed;

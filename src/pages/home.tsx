@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Fragment, useId } from "react";
 import { CobaltPrint } from "#/components/cobalt-print";
 import { CursorMaker } from "#/components/cursor-maker";
@@ -11,8 +10,6 @@ import { Roommate } from "#/components/roommate";
 import { external } from "#/lib/external";
 import { projects, smallerThings } from "#/lib/projects";
 
-export const Route = createFileRoute("/")({ component: Home });
-
 const links = [
     { label: "GitHub", href: "https://github.com/kyledickey" },
     { label: "Bluesky", href: "https://bsky.app/profile/kyle.so" },
@@ -20,7 +17,7 @@ const links = [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/kyletdickey" },
 ];
 
-function Home() {
+export function Home() {
     const mainId = useId();
     const projectsId = useId();
     const recordsId = useId();

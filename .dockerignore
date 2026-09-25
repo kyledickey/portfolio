@@ -1,0 +1,10 @@
+.git
+.github
+.env
+node_modules
+dist
+dist-server
+bin
+.output
+.nitro
+.tanstack
