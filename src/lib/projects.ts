@@ -74,7 +74,7 @@ export const projects: Project[] = [
         name: "Alias",
         sprite: "alias",
         line: "The game my family plays on holidays, now in your browser.",
-        url: "https://alias.kyle.so",
+        url: "https://alias.party",
         source: "https://github.com/kyledickey/alias",
         aside: "for my family",
     },
