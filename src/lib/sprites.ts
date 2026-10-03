@@ -227,6 +227,33 @@ const txto: Sprite = (pen) => {
     }
 };
 
+const PLAY = ["#..", "##.", "#.."];
+const LEVELS = [4, 7, 9, 6, 8, 5, 3, 5];
+
+const sptui: Sprite = (pen) => {
+    shadow(pen, 2, 4, 28, 23);
+    card(pen, 2, 4, 28, 23);
+    pen.line(3, 8, 28, 8);
+    for (const x of [5, 7, 9]) pen.set(x, 6, 1);
+    // A spectrum that dances while the song plays.
+    LEVELS.forEach((level, i) => {
+        const height = moving(pen)
+            ? Math.round(
+                  5 +
+                      Math.sin(pen.t * 7 + i * 1.3) * 2.5 +
+                      Math.sin(pen.t * 4.3 - i * 0.7) * 1.5,
+              )
+            : level;
+        pen.rect(5 + i * 3, 20 - height, 2, height, 1);
+    });
+    // Play button and a progress bar that creeps along.
+    pen.glyph(PLAY, 5, 22);
+    const played = moving(pen) ? Math.floor(pen.t * 3) % 18 : 7;
+    for (let x = 10; x <= 27; x++) {
+        if (x - 10 <= played || x % 2 === 0) pen.set(x, 23, 1);
+    }
+};
+
 const LEAF_LEFT = ["##..", "####", ".###"];
 const LEAF_RIGHT = ["..##", "####", "###."];
 
@@ -352,6 +379,7 @@ export const sprites = {
     nosystem,
     stocktoys,
     txto,
+    sptui,
     moss,
     alias,
     mines,
