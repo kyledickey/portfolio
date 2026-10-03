@@ -11,6 +11,14 @@ export type Project = {
 
 export const projects: Project[] = [
     {
+        name: "sptui",
+        sprite: "sptui",
+        line: "Spotify in your terminal. A fast, keyboard-driven player.",
+        url: "https://sptui.sh",
+        source: "https://github.com/kyledickey/sptui",
+        aside: "newest one",
+    },
+    {
         name: "Are they up?",
         sprite: "aretheyup",
         line: "A live website outage tracker. Check if a site is down for everyone or just you.",
