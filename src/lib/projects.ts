@@ -11,12 +11,19 @@ export type Project = {
 
 export const projects: Project[] = [
     {
+        name: "shed",
+        sprite: "shed",
+        line: "Self-hosted deploys for your own server, like Railway on a VPS.",
+        url: "https://shed.land",
+        source: "https://github.com/kyledickey/shed",
+        aside: "newest one",
+    },
+    {
         name: "sptui",
         sprite: "sptui",
         line: "Spotify in your terminal. A fast, keyboard-driven player.",
         url: "https://sptui.sh",
         source: "https://github.com/kyledickey/sptui",
-        aside: "newest one",
     },
     {
         name: "Are they up?",

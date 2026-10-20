@@ -227,6 +227,32 @@ const txto: Sprite = (pen) => {
     }
 };
 
+const shed: Sprite = (pen) => {
+    // A shingled roof with a round window up in the gable.
+    for (let y = 4; y <= 13; y++) pen.rect(16 - y, y, y * 2, 1, 0.5);
+    pen.path([
+        [1, 14],
+        [12, 3],
+        [19, 3],
+        [30, 14],
+    ]);
+    pen.line(1, 14, 30, 14);
+    pen.blob(15.5, 9, 2.5, 2.5, 0);
+    pen.box(4, 14, 24, 15, 0);
+    pen.line(0, 28, 31, 28);
+    pen.box(20, 18, 5, 5, 0);
+    pen.line(22, 18, 22, 22);
+    pen.line(20, 20, 24, 20);
+    // The door swings open on its hinge to show a crate inside.
+    const open = moving(pen) ? (1 - Math.cos(pen.t * 2)) / 2 : 0;
+    const width = Math.max(2, Math.round(10 - open * 8));
+    pen.rect(9, 19, 8, 9, 1);
+    pen.rect(11, 22, 5, 6, 0);
+    pen.line(11, 24, 15, 24);
+    pen.box(8, 18, width, 11, 0);
+    if (width > 4) pen.line(9, 19, 6 + width, 27);
+};
+
 const PLAY = ["#..", "##.", "#.."];
 const LEVELS = [4, 7, 9, 6, 8, 5, 3, 5];
 
@@ -380,6 +406,7 @@ export const sprites = {
     stocktoys,
     txto,
     sptui,
+    shed,
     moss,
     alias,
     mines,
